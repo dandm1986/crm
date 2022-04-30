@@ -20,7 +20,7 @@
   grid-column: 1 / -1;
 }
 
-.grid--3-cols .summary {
+.grid--3-cols .summary-section {
   color: var(--color-primary-tint-5);
 
   display: flex;
@@ -30,7 +30,7 @@
   grid-column: 3;
 }
 
-.grid--3-cols .summary .summary-item:not(:last-child) {
+.grid--3-cols .summary-section .summary-item:not(:last-child) {
   margin-bottom: var(--spacing-12);
 }
 

@@ -55,14 +55,14 @@ class Deal {
       registration: {
         expiresDate:
           HELPERS.checkCustomFields(data, `Окончание регистрации`) &&
-          HELPERS.getDateFromString(data).getTime(),
+          HELPERS.getDateFromString(data, `Окончание регистрации`),
       },
       link: HELPERS.checkCustomFields(data, `№ тикета`),
     };
-    this.#calculateProperties();
+    this.calculateProperties();
   }
 
-  #calculateProperties() {
+  calculateProperties() {
     this.revenue.forecast = this.revenue.pipe * this.stage.ratio;
     this.income.forecast = this.income.pipe * this.stage.ratio;
     this.dates.created.createdMonth = HELPERS.getMonthfromDate(
@@ -105,9 +105,20 @@ const getDealsData = async function () {
 
 export const state = {
   deals: [],
+  summary: {
+    dealsTotal: ``,
+    revenueTotal: ``,
+    incomeTotal: ``,
+  },
   managers: [],
   stages: [],
   closeMonth: [],
+};
+
+const createSummary = function () {
+  state.summary.dealsTotal = HELPERS.getSum(state.deals, `1`);
+  state.summary.revenueTotal = HELPERS.getSum(state.deals, `el.revenue.pipe`);
+  state.summary.incomeTotal = HELPERS.getSum(state.deals, `el.income.pipe`);
 };
 
 export const getToken = async function (userData) {
@@ -127,10 +138,22 @@ export const getToken = async function (userData) {
   }
 };
 
+export const getUserData = async function () {
+  try {
+    const data = await HELPERS.getJSON(`api/2.0/people/@self`, `GET`, {
+      Authorization: `Bearer ${CONFIG.USER_DATA.token}`,
+    });
+    return data.response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const createState = async function () {
   try {
     const dealsData = await getDealsData();
     dealsData.forEach(el => state.deals.push(new Deal(el)));
+    createSummary();
   } catch (error) {
     throw error;
   }

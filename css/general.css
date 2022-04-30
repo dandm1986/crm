@@ -170,3 +170,49 @@ body {
 .btn--outline:active {
   color: var(--color-accent);
 }
+
+/* SPINNER */
+
+.spinner {
+  margin: 5rem auto;
+  text-align: center;
+}
+
+.spinner svg {
+  height: 6rem;
+  width: 6rem;
+  fill: var(--color-accent);
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ERROR */
+
+.error {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 5rem 4rem;
+  display: flex;
+}
+
+.error svg {
+  height: 3rem;
+  width: 3rem;
+  fill: var(--color-accent);
+  transform: translateY(-0.3rem);
+}
+
+.error p {
+  margin-left: var(--spacing-16);
+  font-size: var(--font-size-18);
+  line-height: var(--line-height-medium);
+  font-weight: var(--font-weight-semibold);
+}
