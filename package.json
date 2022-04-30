@@ -1,0 +1,19 @@
+{
+  "name": "crm_r7-api",
+  "version": "1.0.0",
+  "description": "A small CRM app that uses R7 database via API to collect data.",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "Daniil Dmitrenko",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.5.0"
+  },
+  "dependencies": {
+    "core-js": "^3.22.2",
+    "ionicons": "^6.0.1",
+    "regenerator-runtime": "^0.13.9"
+  }
+}

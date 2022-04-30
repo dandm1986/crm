@@ -1,0 +1,2962 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./css/vars.css" />
+    <link rel="stylesheet" href="./css/general.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script type="module" src="./js/sript.js"></script>
+
+    <title>CRM R7 API</title>
+  </head>
+  <body>
+    <!-------------------------------------------------------------------->
+    <!-------------------------------- MODALS ---------------------------->
+    <!-------------------------------------------------------------------->
+
+    <div class="modal-container">
+      <!-------------------------------------------------------------------->
+      <!------------------------------- SIGN-IN ---------------------------->
+      <!-------------------------------------------------------------------->
+
+      <div class="modal sign-in hidden">
+        <form action="#" class="form form--sign-in">
+          <input type="text" id="login" placeholder="Логин" required />
+          <input
+            type="text"
+            id="password"
+            placeholder="Пароль"
+            style="-webkit-text-security: circle"
+            required
+          />
+          <button class="btn flex btn-form" id="auth-form--submit-btn">
+            Continue
+          </button>
+        </form>
+      </div>
+      <!-------------------------------------------------------------------->
+      <!--------------------------------- STATS ---------------------------->
+      <!-------------------------------------------------------------------->
+
+      <div class="modal stats-container hidden">
+        <svg class="btn--close-modal">
+          <use href="./img/icons/icons.svg#close"></use>
+        </svg>
+        <div class="grid grid--2-1 stats">
+          <!-------------------------------------------------------------------->
+          <!------------------------------ OVERVIEW ---------------------------->
+          <!-------------------------------------------------------------------->
+
+          <div class="grid grid--2-cols stats-overview">
+            <!-------------------------------------------------------------------->
+            <!-------------------------------- FUNNEL ---------------------------->
+            <!-------------------------------------------------------------------->
+
+            <div class="grid grid--2-1 stats-overview--funnel box-container">
+              <div class="box flex header include-data">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#user"></use>
+                  </svg>
+                  <p class="text-content" id="stats-overview--user-name">
+                    Дмитренко Даниил
+                  </p>
+                </div>
+                <p class="text-content" id="stats-overview--deals-total">96</p>
+              </div>
+              <div class="box header summary">
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p class="text-content" id="stats-overview--sum-revenue">
+                    435,35 млн
+                  </p>
+                </div>
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p class="text-content" id="stats-overview--sum-income">
+                    120,42 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box flex header include-data">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#stage"></use>
+                  </svg>
+                  <p class="text-content">Первичный контакт</p>
+                </div>
+                <p
+                  class="text-content"
+                  id="stats-overview--deals-total--first-contact"
+                >
+                  6
+                </p>
+              </div>
+              <div class="box standard summary">
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-revenue--first-contact"
+                  >
+                    18,35 млн
+                  </p>
+                </div>
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-income--first-contact"
+                  >
+                    7,26 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box flex header include-data">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#stage"></use>
+                  </svg>
+                  <p class="text-content">Над воронкой</p>
+                </div>
+                <p
+                  class="text-content"
+                  id="stats-overview--deals-total--above-funnel"
+                >
+                  23
+                </p>
+              </div>
+              <div class="box standard summary">
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-revenue--above-funnel"
+                  >
+                    125,35 млн
+                  </p>
+                </div>
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-income--above-funnel"
+                  >
+                    37,26 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box flex header include-data">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#stage"></use>
+                  </svg>
+                  <p class="text-content">В воронке</p>
+                </div>
+                <p
+                  class="text-content"
+                  id="stats-overview--deals-total--in-funnel"
+                >
+                  51
+                </p>
+              </div>
+              <div class="box standard summary">
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-revenue--in-funnel"
+                  >
+                    290,35 млн
+                  </p>
+                </div>
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-income--in-funnel"
+                  >
+                    10,26 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box flex header include-data">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#stage"></use>
+                  </svg>
+                  <p class="text-content">Лучшие без срока</p>
+                </div>
+                <p
+                  class="text-content"
+                  id="stats-overview--deals-total--best-no-date"
+                >
+                  1
+                </p>
+              </div>
+              <div class="box standard summary">
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-revenue--best-no-date"
+                  >
+                    0 млн
+                  </p>
+                </div>
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-income--best-no-date"
+                  >
+                    0 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box flex header include-data">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#stage"></use>
+                  </svg>
+                  <p class="text-content">Несколько лучших</p>
+                </div>
+                <p class="text-content" id="stats-overview--deals-total--best">
+                  1
+                </p>
+              </div>
+              <div class="box standard summary">
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-revenue--best"
+                  >
+                    1 млн
+                  </p>
+                </div>
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p class="text-content" id="stats-overview--sum-income--best">
+                    0,11 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box flex header include-data">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#stage"></use>
+                  </svg>
+                  <p class="text-content">Закрыто успешно</p>
+                </div>
+                <p
+                  class="text-content"
+                  id="stats-overview--deals-total--closed-success"
+                >
+                  4
+                </p>
+              </div>
+              <div class="box standard summary">
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-revenue--closed-success"
+                  >
+                    2,72 млн
+                  </p>
+                </div>
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-income--closed-success"
+                  >
+                    1,12 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box flex header include-data">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#stage"></use>
+                  </svg>
+                  <p class="text-content">Закрыто неуспешно</p>
+                </div>
+                <p
+                  class="text-content"
+                  id="stats-overview--deals-total--closed-failure"
+                >
+                  10
+                </p>
+              </div>
+              <div class="box standard summary">
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-revenue--closed-failure"
+                  >
+                    24,35 млн
+                  </p>
+                </div>
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-overview--sum-income--closed-failure"
+                  >
+                    8,26 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-------------------------------------------------------------------->
+            <!----------------------- PIPE & FORECAST ---------------------------->
+            <!-------------------------------------------------------------------->
+
+            <div class="stats-overview--pipe-forecast">
+              <!-------------------------------------------------------------------->
+              <!--------------------------------- 2022 ----------------------------->
+              <!-------------------------------------------------------------------->
+
+              <div
+                class="grid grid--3-cols pipe-forecast--current-year box-container"
+              >
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#period"></use>
+                    </svg>
+                    <p class="text-content">2022</p>
+                  </div>
+                </div>
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p class="text-content">Выручка</p>
+                  </div>
+                </div>
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p class="text-content">ВД</p>
+                  </div>
+                </div>
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#stage"></use>
+                    </svg>
+                    <p class="text-content">Воронка</p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--current-year--pipe-revenue"
+                    >
+                      345,12 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--current-year--pipe-income"
+                    >
+                      97,54 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#scale"></use>
+                    </svg>
+                    <p class="text-content">Прогноз</p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--current-year--forecast-revenue"
+                    >
+                      106,24 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--current-year--forecast-income"
+                    >
+                      27,79 млн
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-------------------------------------------------------------------->
+              <!--------------------------------- Q1-Q4 ---------------------------->
+              <!-------------------------------------------------------------------->
+
+              <div
+                class="grid grid--3-cols pipe-forecast--current-year-quarterly box-container"
+              >
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#scale"></use>
+                    </svg>
+                    <p class="text-content">Q1 2022</p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--current-year-quarterly--forecast-Q1-revenue"
+                    >
+                      91,12 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--current-year-quarterly--forecast-Q1-income"
+                    >
+                      23,24 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#scale"></use>
+                    </svg>
+                    <p class="text-content">Q2 2022</p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--current-year-quarterly--forecast-Q2-revenue"
+                    >
+                      91,12 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--current-year-quarterly--forecast-Q2-income"
+                    >
+                      23,24 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#scale"></use>
+                    </svg>
+                    <p class="text-content">Q3 2022</p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--current-year-quarterly--forecast-Q3-revenue"
+                    >
+                      91,12 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--current-year-quarterly--forecast-Q3-income"
+                    >
+                      23,24 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#scale"></use>
+                    </svg>
+                    <p class="text-content">Q4 2022</p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--current-year-quarterly--forecast-Q4-revenue"
+                    >
+                      91,12 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--current-year-quarterly--forecast-Q4-income"
+                    >
+                      23,24 млн
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-------------------------------------------------------------------->
+              <!--------------------------------- 2023 ----------------------------->
+              <!-------------------------------------------------------------------->
+
+              <div
+                class="grid grid--3-cols pipe-forecast--next-year box-container"
+              >
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#period"></use>
+                    </svg>
+                    <p class="text-content">2023</p>
+                  </div>
+                </div>
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p class="text-content">Выручка</p>
+                  </div>
+                </div>
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p class="text-content">ВД</p>
+                  </div>
+                </div>
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#stage"></use>
+                    </svg>
+                    <p class="text-content">Воронка</p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--next-year--pipe-revenue"
+                    >
+                      345,12 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--next-year--pipe-income"
+                    >
+                      97,54 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box header flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#scale"></use>
+                    </svg>
+                    <p class="text-content">Прогноз</p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--next-year--forecast-revenue"
+                    >
+                      106,24 млн
+                    </p>
+                  </div>
+                </div>
+                <div class="box standard flex">
+                  <div class="flex">
+                    <svg class="icon">
+                      <use href="./img/icons/icons.svg#money"></use>
+                    </svg>
+                    <p
+                      class="text-content"
+                      id="pipe-forecast--next-year--forecast-income"
+                    >
+                      27,79 млн
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-------------------------------------------------------------------->
+          <!------------------------------- MONTHLY ---------------------------->
+          <!-------------------------------------------------------------------->
+
+          <div class="stats-monthly">
+            <!------------------------ JAN ------------------------->
+
+            <div class="grid grid--3-cols month box-container">
+              <div class="box header flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#period"></use>
+                  </svg>
+                  <p class="text-content" id="stats-monthly--month-1">Январь</p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-1--forecast-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-1--forecast-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#success"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-1--closed-success"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-1--closed-success-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-1--closed-success-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#failure"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-1--closed-failure"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-1--closed-failure-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-1--closed-failure-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-1--new-deals"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-1--new-deals-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-1--new-deals-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!------------------------ FEB ------------------------->
+
+            <div class="grid grid--3-cols month box-container">
+              <div class="box header flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#period"></use>
+                  </svg>
+                  <p class="text-content" id="stats-monthly--month-2">
+                    Февраль
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-2--forecast-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-2--forecast-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#success"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-2--closed-success"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-2--closed-success-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-2--closed-success-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#failure"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-2--closed-failure"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-2--closed-failure-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-2--closed-failure-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-2--new-deals"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-2--new-deals-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-2--new-deals-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!------------------------ MAR ------------------------->
+
+            <div class="grid grid--3-cols month box-container">
+              <div class="box header flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#period"></use>
+                  </svg>
+                  <p class="text-content" id="stats-monthly--month-3">Март</p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-3--forecast-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-3--forecast-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#success"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-3--closed-success"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-3--closed-success-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-3--closed-success-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#failure"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-3--closed-failure"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-3--closed-failure-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-3--closed-failure-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-3--new-deals"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-3--new-deals-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-3--new-deals-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!------------------------ APR ------------------------->
+
+            <div class="grid grid--3-cols month box-container">
+              <div class="box header flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#period"></use>
+                  </svg>
+                  <p class="text-content" id="stats-monthly--month-4">Апрель</p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-4--forecast-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-4--forecast-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#success"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-4--closed-success"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-4--closed-success-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-4--closed-success-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#failure"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-4--closed-failure"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-4--closed-failure-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-4--closed-failure-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-4--new-deals"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-4--new-deals-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-4--new-deals-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!------------------------ MAY ------------------------->
+
+            <div class="grid grid--3-cols month box-container">
+              <div class="box header flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#period"></use>
+                  </svg>
+                  <p class="text-content" id="stats-monthly--month-5">Май</p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-5--forecast-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-5--forecast-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#success"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-5--closed-success"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-5--closed-success-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-5--closed-success-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#failure"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-5--closed-failure"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-5--closed-failure-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-5--closed-failure-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-5--new-deals"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-5--new-deals-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-5--new-deals-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!------------------------ JUN ------------------------->
+
+            <div class="grid grid--3-cols month box-container">
+              <div class="box header flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#period"></use>
+                  </svg>
+                  <p class="text-content" id="stats-monthly--month-6">Июнь</p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-6--forecast-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-6--forecast-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#success"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-6--closed-success"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-6--closed-success-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-6--closed-success-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#failure"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-6--closed-failure"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-6--closed-failure-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-6--closed-failure-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-6--new-deals"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-6--new-deals-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-6--new-deals-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!------------------------ JUL ------------------------->
+
+            <div class="grid grid--3-cols month box-container">
+              <div class="box header flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#period"></use>
+                  </svg>
+                  <p class="text-content" id="stats-monthly--month-7">Июль</p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-7--forecast-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-7--forecast-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#success"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-7--closed-success"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-7--closed-success-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-7--closed-success-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#failure"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-7--closed-failure"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-7--closed-failure-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-7--closed-failure-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-7--new-deals"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-7--new-deals-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-7--new-deals-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!------------------------ AUG ------------------------->
+
+            <div class="grid grid--3-cols month box-container">
+              <div class="box header flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#period"></use>
+                  </svg>
+                  <p class="text-content" id="stats-monthly--month-8">Август</p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-8--forecast-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-8--forecast-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#success"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-8--closed-success"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-8--closed-success-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-8--closed-success-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#failure"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-8--closed-failure"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-8--closed-failure-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-8--closed-failure-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-8--new-deals"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-8--new-deals-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-8--new-deals-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!------------------------ SEP ------------------------->
+
+            <div class="grid grid--3-cols month box-container">
+              <div class="box header flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#period"></use>
+                  </svg>
+                  <p class="text-content" id="stats-monthly--month-9">
+                    Сентябрь
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-9--forecast-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-9--forecast-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#success"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-9--closed-success"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-9--closed-success-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-9--closed-success-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#failure"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-9--closed-failure"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-9--closed-failure-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-9--closed-failure-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-9--new-deals"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-9--new-deals-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-9--new-deals-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!------------------------ OCT ------------------------->
+
+            <div class="grid grid--3-cols month box-container">
+              <div class="box header flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#period"></use>
+                  </svg>
+                  <p class="text-content" id="stats-monthly--month-10">
+                    Октябрь
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-10--forecast-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-10--forecast-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#success"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-10--closed-success"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-10--closed-success-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-10--closed-success-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#failure"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-10--closed-failure"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-10--closed-failure-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-10--closed-failure-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-10--new-deals"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-10--new-deals-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-10--new-deals-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!------------------------ NOV ------------------------->
+
+            <div class="grid grid--3-cols month box-container">
+              <div class="box header flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#period"></use>
+                  </svg>
+                  <p class="text-content" id="stats-monthly--month-11">
+                    Ноябрь
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-11--forecast-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-11--forecast-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#success"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-11--closed-success"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-11--closed-success-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-11--closed-success-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#failure"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-11--closed-failure"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-11--closed-failure-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-11--closed-failure-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-11--new-deals"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-11--new-deals-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-11--new-deals-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!------------------------ DEC ------------------------->
+
+            <div class="grid grid--3-cols month box-container">
+              <div class="box header flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#period"></use>
+                  </svg>
+                  <p class="text-content" id="stats-monthly--month-12">
+                    Декабрь
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-12--forecast-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#scale"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-12--forecast-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#success"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-12--closed-success"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-12--closed-success-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-12--closed-success-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#failure"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-12--closed-failure"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-12--closed-failure-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-12--closed-failure-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-12--new-deals"
+                  >
+                    2
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-12--new-deals-revenue"
+                  >
+                    106,24 млн
+                  </p>
+                </div>
+              </div>
+              <div class="box standard flex">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p
+                    class="text-content"
+                    id="stats-monthly--month-12--new-deals-income"
+                  >
+                    27,79 млн
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-------------------------------------------------------------------->
+    <!------------------------------ OVERLAY ----------------------------->
+    <!-------------------------------------------------------------------->
+
+    <div class="overlay hidden"></div>
+
+    <div class="main-screen container">
+      <div class="grid grid--1-2">
+        <!-------------------------------------------------------------------->
+        <!--------------------------- FILTER-SECTION ------------------------->
+        <!-------------------------------------------------------------------->
+
+        <div class="filters-section">
+          <!-------------------------------------------------------------------->
+          <!--------------------------------- USER ----------------------------->
+          <!-------------------------------------------------------------------->
+
+          <div class="user-container box-container grid grid--2-1">
+            <a href="#" class="btn flex btn--full" id="user-menu--stats">
+              <div class="flex">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#user"></use>
+                </svg>
+                <p class="text-content" id="user-name">Даниил Дмитренко</p>
+              </div>
+              <svg class="icon">
+                <use href="./img/icons/icons.svg#stats"></use>
+              </svg>
+            </a>
+            <a href="#" class="btn flex btn--full" id="user-menu--refresh">
+              <svg class="icon">
+                <use href="./img/icons/icons.svg#refresh"></use>
+              </svg>
+            </a>
+          </div>
+          <!-------------------------------------------------------------------->
+          <!------------------------------ FILTERS ----------------------------->
+          <!-------------------------------------------------------------------->
+
+          <div class="filters-container box-container grid grid--3-cols">
+            <a href="#" class="btn flex btn--full" id="btn--filter-manager">
+              <div class="flex">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#user"></use>
+                </svg>
+                <p class="text-content">Менеджер</p>
+              </div>
+              <svg class="icon">
+                <use href="./img/icons/icons.svg#search"></use>
+              </svg>
+            </a>
+            <div class="box filter search-container">
+              <select class="filter-field" id="filter-manager">
+                <option value="Инишева Анна">Инишева Анна</option>
+                <option value="Курылев Владимир">Курылев Владимир</option>
+                <option value="Федяков Сергей">Федяков Сергей</option>
+              </select>
+            </div>
+            <a href="#" class="btn flex btn--full" id="btn--search-company">
+              <div class="flex">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#company"></use>
+                </svg>
+                <p class="text-content">Компания</p>
+              </div>
+              <svg class="icon">
+                <use href="./img/icons/icons.svg#search"></use>
+              </svg>
+            </a>
+            <div class="box filter search-container">
+              <input
+                class="filter-field"
+                id="search-company"
+                type="text"
+                placeholder="Поиск по названию"
+              />
+            </div>
+            <a href="#" class="btn flex btn--full" id="btn--filter-deal">
+              <div class="flex">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#deal"></use>
+                </svg>
+                <p class="text-content">Сделка</p>
+              </div>
+              <svg class="icon">
+                <use href="./img/icons/icons.svg#search"></use>
+              </svg>
+            </a>
+            <div class="box filter search-container">
+              <select class="filter-field" id="filter-deal">
+                <option value="Десктоп">Десктоп</option>
+                <option value="Сервер оптимальный">Сервер оптимальный</option>
+                <option value="Сервер базовый">Сервер базовый</option>
+              </select>
+            </div>
+            <a href="#" class="btn flex btn--full" id="btn--filter-stage">
+              <div class="flex">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#stage"></use>
+                </svg>
+                <p class="text-content">Этап</p>
+              </div>
+              <svg class="icon">
+                <use href="./img/icons/icons.svg#search"></use>
+              </svg>
+            </a>
+            <div class="box filter search-container">
+              <select class="filter-field" id="filter-stage">
+                <option value="Над воронкой">Над воронкой</option>
+                <option value="В воронке">В воронке</option>
+                <option value="Несколько лучших">Несколько лучших</option>
+              </select>
+            </div>
+            <a href="#" class="btn flex btn--full" id="btn--filter-close-date">
+              <div class="flex">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#closeDate"></use>
+                </svg>
+                <p class="text-content">Закрытие</p>
+              </div>
+              <svg class="icon">
+                <use href="./img/icons/icons.svg#search"></use>
+              </svg>
+            </a>
+            <div class="box filter search-container">
+              <select class="filter-field" id="filter-close-date">
+                <option value="Январь">Январь</option>
+                <option value="Февраль">Февраль</option>
+                <option value="Март">Март</option>
+              </select>
+            </div>
+            <div class="grid grid--3-cols">
+              <a href="#" class="btn flex btn--full" id="btn--sort-revenue">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p class="text-content">Выручка</p>
+                </div>
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#sort"></use>
+                </svg>
+              </a>
+              <a href="#" class="btn flex btn--full" id="btn--sort-income">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p class="text-content">ВД</p>
+                </div>
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#sort"></use>
+                </svg>
+              </a>
+              <div class="box filter summary">
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#deal"></use>
+                  </svg>
+                  <p class="text-content" id="total-deals">80</p>
+                </div>
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p class="text-content" id="sum-revenue">435,35 млн</p>
+                </div>
+                <div class="summary-item flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#money"></use>
+                  </svg>
+                  <p class="text-content" id="sum-income">120,42 млн</p>
+                </div>
+              </div>
+              <a
+                href="#"
+                class="btn flex btn--full"
+                id="btn--sort-registration"
+              >
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#ticket"></use>
+                  </svg>
+                  <p class="text-content">Тикет</p>
+                </div>
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#sort"></use>
+                </svg>
+              </a>
+              <a href="#" class="btn flex btn--full" id="btn--sort-created">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#createDate"></use>
+                  </svg>
+                  <p class="text-content">Дата</p>
+                </div>
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#sort"></use>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-------------------------------------------------------------------->
+        <!--------------------------- DEALS-SECTION -------------------------->
+        <!-------------------------------------------------------------------->
+
+        <div class="deals-section">
+          <!-------------------------------------------------------------------->
+          <!--------------------------------- DEAL ----------------------------->
+          <!-------------------------------------------------------------------->
+
+          <div class="deal-container box-container grid grid--2-cols">
+            <div class="grid grid--1-2">
+              <a href="#" class="btn flex btn--full" id="user-deal--stats">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#user"></use>
+                  </svg>
+                  <p class="text-content" id="manager-name">Инишева</p>
+                </div>
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#stats"></use>
+                </svg>
+              </a>
+              <div class="box flex standard company-name">
+                <p class="text-content">ММЗ Авангард</p>
+                <a href="#" class="btn flex btn--outline">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#open"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="box flex standard">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#createDate"></use>
+                </svg>
+                <p class="text-content">20.11.2021</p>
+              </div>
+              <div class="box flex standard">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#closeDate"></use>
+                </svg>
+                <p class="text-content">30.06.2022</p>
+              </div>
+              <div class="box flex standard">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#stage"></use>
+                </svg>
+                <p class="text-content">В воронке</p>
+              </div>
+            </div>
+            <div class="grid grid--2-1">
+              <div class="box flex standard deal-specification">
+                <div class="specification-content">
+                  <p class="text-content">Р7 Офис</p>
+                  <p class="text-content">Сервер оптимальный + десктоп</p>
+                  <p class="text-content">1 500 шт</p>
+                </div>
+                <a href="#" class="btn flex btn--outline">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#open"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="box flex standard">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#money"></use>
+                </svg>
+                <p class="text-content">19,36 млн</p>
+              </div>
+              <div class="box flex standard">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#money"></use>
+                </svg>
+                <p class="text-content">6,12 млн</p>
+              </div>
+              <div class="box flex standard">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#ticket"></use>
+                </svg>
+                <p class="text-content">15.05.2022</p>
+              </div>
+            </div>
+          </div>
+          <!-------------------------------------------------------------------->
+          <!--------------------------------- DEAL ----------------------------->
+          <!-------------------------------------------------------------------->
+
+          <div class="deal-container box-container grid grid--2-cols">
+            <div class="grid grid--1-2">
+              <a href="#" class="btn flex btn--full" id="user-deal--stats">
+                <div class="flex">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#user"></use>
+                  </svg>
+                  <p class="text-content" id="manager-name">Инишева</p>
+                </div>
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#stats"></use>
+                </svg>
+              </a>
+              <div class="box flex standard company-name">
+                <p class="text-content">ММЗ Авангард</p>
+                <a href="#" class="btn flex btn--outline">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#open"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="box flex standard">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#createDate"></use>
+                </svg>
+                <p class="text-content">20.11.2021</p>
+              </div>
+              <div class="box flex standard">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#closeDate"></use>
+                </svg>
+                <p class="text-content">30.06.2022</p>
+              </div>
+              <div class="box flex standard">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#stage"></use>
+                </svg>
+                <p class="text-content">В воронке</p>
+              </div>
+            </div>
+            <div class="grid grid--2-1">
+              <div class="box flex standard deal-specification">
+                <div class="specification-content">
+                  <p class="text-content">Р7 Офис</p>
+                  <p class="text-content">Сервер оптимальный + десктоп</p>
+                  <p class="text-content">1 500 шт</p>
+                </div>
+                <a href="#" class="btn flex btn--outline">
+                  <svg class="icon">
+                    <use href="./img/icons/icons.svg#open"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="box flex standard">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#money"></use>
+                </svg>
+                <p class="text-content">19,36 млн</p>
+              </div>
+              <div class="box flex standard">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#money"></use>
+                </svg>
+                <p class="text-content">6,12 млн</p>
+              </div>
+              <div class="box flex standard">
+                <svg class="icon">
+                  <use href="./img/icons/icons.svg#ticket"></use>
+                </svg>
+                <p class="text-content">15.05.2022</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
