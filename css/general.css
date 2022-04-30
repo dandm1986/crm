@@ -42,6 +42,10 @@ body {
   align-items: center;
 }
 
+.link {
+  justify-content: space-between;
+}
+
 .box-container {
   font-size: var(--font-size-14);
   font-weight: var(--font-weight-default);
