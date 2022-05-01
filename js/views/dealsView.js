@@ -2,7 +2,6 @@ import icons from 'url:../../img/icons/icons.svg';
 import View from './View';
 import { HOST } from '../config.js';
 import * as HELPERS from '../helpers.js';
-// import { filter } from 'core-js/core/array';
 
 class DealsView extends View {
   _parentElement = document.querySelector('.deals-section');

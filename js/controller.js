@@ -10,32 +10,33 @@ import filterStagesView from './views/filterStagesView.js';
 import filterMonthsView from './views/filterMonthsView.js';
 import summaryView from './views/summaryView.js';
 
-const updateViews = function (data) {
+const renderViews = function (data) {
   dealsView.render(data);
   summaryView.render(data);
   filterManagersView.render(data);
   filterStagesView.render(data);
   filterMonthsView.render(data);
 };
+
+const filterDeals = function (id, value) {
+  [method, propertyRoute] = id.split(`--`);
+  const property = propertyRoute.replaceAll(`-`, `.`);
+  MODEL.updateState(method, property, value);
+  renderViews(MODEL.state);
+};
+
 const login = async function () {
   try {
     dealsView.renderSpinner();
     await MODEL.getToken();
     await MODEL.createState();
-    updateViews(MODEL.state);
+    renderViews(MODEL.state);
   } catch (error) {
     console.log(error);
   }
 };
 
 login();
-
-const filterDeals = function (id, value) {
-  [method, filterRoute] = id.split(`--`);
-  const field = filterRoute.replaceAll(`-`, `.`);
-  MODEL.updateState(method, `deal.${field}`, value);
-  updateViews(MODEL.state);
-};
 
 const init = function () {
   dealsView.addHandlerUpdate(filterDeals);

@@ -112,3 +112,11 @@ export const getUnique = function (arr, property) {
   }
   return newArr.filter(onlyUnique);
 };
+
+export const getDescendantProperty = function (obj, desc) {
+  const arr = desc.split('.');
+  while (arr.length) {
+    obj = obj[arr.shift()];
+  }
+  return obj;
+};

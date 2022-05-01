@@ -238,14 +238,17 @@ export const createState = async function () {
   }
 };
 
-export const updateState = function (method, field, value) {
+export const updateState = function (method, prop, value) {
   if (method === `filter`) {
     state.deals = state.deals.filter(
-      deal => eval(field) === value.toLowerCase()
+      deal => HELPERS.getDescendantProperty(deal, prop) === value.toLowerCase()
     );
   } else if (method === `search`) {
-    state.deals = state.deals.filter(
-      deal => eval(field).includes(value.toLowerCase()) === true
+    state.deals = state.deals.filter(deal =>
+      Object.entries(HELPERS.getDescendantProperty(deal, prop))
+        .flat() //TODO: find a universal way for any number of nested arrays
+        .map(el => el + ``)
+        .some(el => el.includes(value))
     );
   }
   createSummary();
