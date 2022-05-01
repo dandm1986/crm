@@ -92,11 +92,11 @@ export const reduceToMillions = function (number) {
 };
 
 export const toUpperCase = function (string) {
-  return string.toUpperCase();
+  return string && string.toUpperCase();
 };
 
 export const capitalizeFirstLetter = function (string) {
-  return string[0].toUpperCase() + string.slice(1);
+  return string && string[0].toUpperCase() + string.slice(1);
 };
 
 //////////////// CALCULATE & FILTER //////////////////
@@ -111,9 +111,4 @@ export const getUnique = function (arr, property) {
     return self.indexOf(value) === index;
   }
   return newArr.filter(onlyUnique);
-};
-
-export const filterBy = function (arr, property, value) {
-  const newArr = arr.filter(el => eval(property) === value);
-  return newArr;
 };

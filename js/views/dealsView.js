@@ -2,6 +2,7 @@ import icons from 'url:../../img/icons/icons.svg';
 import View from './View';
 import { HOST } from '../config.js';
 import * as HELPERS from '../helpers.js';
+// import { filter } from 'core-js/core/array';
 
 class DealsView extends View {
   _parentElement = document.querySelector('.deals-section');
@@ -12,6 +13,14 @@ class DealsView extends View {
   //     window.addEventListener(event, handler)
   //   );
   // }
+
+  addHandlerUpdate(handler) {
+    const filtersContainer = document.querySelector(`.filters-container`);
+    filtersContainer.addEventListener(`change`, function (e) {
+      const filterField = e.target.closest(`.filter-field`);
+      handler(e.target.id, filterField.value);
+    });
+  }
 
   _generateMarkup() {
     return `${this._data.deals.map(this._generateMarkupDeal).join(``)}`;
@@ -77,10 +86,10 @@ class DealsView extends View {
             <p class="text-content">${HELPERS.toUpperCase(
               deal.deal.specification.vendor
             )}</p>
-            <p class="text-content">${deal.deal.specification.product}, ${
-      deal.deal.specification.licensePeriod
-    }</p>
-            <p class="text-content">${deal.deal.specification.quantity} шт</p>
+            <p class="text-content">${HELPERS.capitalizeFirstLetter(
+              deal.deal.specification.product
+            )} ${deal.deal.specification.licenseType}</p>
+            <p class="text-content">${deal.deal.specification.quantity}</p>
           </div>
           <a href="${
             HOST + `Products/CRM/Deals.aspx?id=` + deal.deal.dealID

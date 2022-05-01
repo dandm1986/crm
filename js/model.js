@@ -22,11 +22,17 @@ class Deal {
       dealID: data.id,
       title: HELPERS.checkContent(data.title).toLowerCase(),
       specification: {
-        vendor: ``,
-        product: ``,
-        licensePeriod: ``,
-        quantity: ``,
-        paymentConditions: ``,
+        vendor: HELPERS.checkCustomFields(data, `Вендор`).toLowerCase(),
+        product: HELPERS.checkCustomFields(data, `Продукт`).toLowerCase(),
+        licenseType: HELPERS.checkCustomFields(
+          data,
+          `Тип лицензии`
+        ).toLowerCase(),
+        quantity: HELPERS.checkCustomFields(data, `Количество`).toLowerCase(),
+        paymentConditions: HELPERS.checkCustomFields(
+          data,
+          `Условия оплаты`
+        ).toLowerCase(),
       },
     };
     this.stage = {
@@ -88,6 +94,18 @@ class Deal {
   }
 }
 
+export const state = {
+  deals: [],
+  summary: {
+    dealsTotal: ``,
+    revenueTotal: ``,
+    incomeTotal: ``,
+  },
+  managers: [],
+  stages: [],
+  closeMonth: [],
+};
+
 const getDealsData = async function () {
   try {
     const data = await HELPERS.getJSON(
@@ -103,22 +121,82 @@ const getDealsData = async function () {
   }
 };
 
-export const state = {
-  deals: [],
-  summary: {
-    dealsTotal: ``,
-    revenueTotal: ``,
-    incomeTotal: ``,
-  },
-  managers: [],
-  stages: [],
-  closeMonth: [],
-};
-
 const createSummary = function () {
-  state.summary.dealsTotal = HELPERS.getSum(state.deals, `1`);
+  state.summary.dealsTotal = state.deals.length;
   state.summary.revenueTotal = HELPERS.getSum(state.deals, `el.revenue.pipe`);
   state.summary.incomeTotal = HELPERS.getSum(state.deals, `el.income.pipe`);
+};
+
+const prepareFilterData = function () {
+  clearOutFilterData();
+  prepareManagers();
+  prepareStages();
+  prepareCloseDates();
+};
+
+const clearOutFilterData = function () {
+  state.managers.length = state.stages.length = state.closeMonth.length = 0;
+};
+
+const prepareManagers = function () {
+  HELPERS.getUnique(state.deals, `el.responsible.responsibleName`).forEach(
+    el => {
+      state.managers.push(el);
+    }
+  );
+};
+
+const prepareStages = function () {
+  HELPERS.getUnique(state.deals, `el.stage.name`).forEach(el => {
+    state.stages.push(el);
+  });
+};
+
+// TODO: Refactor to match current and next year
+const prepareCloseDates = function () {
+  const arr2022 = filterOutClosedDeals(
+    state.deals.filter(el => el.dates.closed.closedYear === 2022)
+  );
+  const arr2023 = filterOutClosedDeals(
+    state.deals.filter(el => el.dates.closed.closedYear === 2023)
+  );
+  const closeMonths = [];
+  const months2022 = HELPERS.getUnique(arr2022, `el.dates.closed.closedMonth`);
+  const months = {
+    январь: 0,
+    февраль: 1,
+    март: 2,
+    апрель: 3,
+    май: 4,
+    июнь: 5,
+    июль: 6,
+    август: 7,
+    сентябрь: 8,
+    октябрь: 9,
+    ноябрь: 10,
+    декабрь: 11,
+  };
+  const currentMonth = new Date().getMonth();
+  months2022.sort(function (m1, m2) {
+    let n1 = months[m1],
+      n2 = months[m2];
+    if (n1 < currentMonth) {
+      n1 = n1 + 12;
+    }
+    if (n2 < currentMonth) {
+      n2 = n2 + 12;
+    }
+    return n1 - n2;
+  });
+  months2022.forEach(el => closeMonths.push(el));
+  arr2023.length > 0 && closeMonths.push(`2023`);
+  closeMonths.forEach(el => state.closeMonth.push(el));
+};
+
+const filterOutClosedDeals = function (arr) {
+  return arr
+    .filter(el => el.stage.name !== `закрыта неудачно`)
+    .filter(el => el.stage.name !== `закрытие/заключение сделки`);
 };
 
 export const getToken = async function (userData) {
@@ -154,7 +232,22 @@ export const createState = async function () {
     const dealsData = await getDealsData();
     dealsData.forEach(el => state.deals.push(new Deal(el)));
     createSummary();
+    prepareFilterData();
   } catch (error) {
     throw error;
   }
+};
+
+export const updateState = function (method, field, value) {
+  if (method === `filter`) {
+    state.deals = state.deals.filter(
+      deal => eval(field) === value.toLowerCase()
+    );
+  } else if (method === `search`) {
+    state.deals = state.deals.filter(
+      deal => eval(field).includes(value.toLowerCase()) === true
+    );
+  }
+  createSummary();
+  prepareFilterData();
 };
