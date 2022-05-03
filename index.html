@@ -21,47 +21,11 @@
     <title>CRM R7 API</title>
   </head>
   <body>
-    <!-------------------------------------------------------------------->
-    <!-------------------------------- MODALS ---------------------------->
-    <!-------------------------------------------------------------------->
+      <!-- <div class="modal stats-container hidden">
 
-    <div class="modal-container">
-      <!-------------------------------------------------------------------->
-      <!------------------------------- SIGN-IN ---------------------------->
-      <!-------------------------------------------------------------------->
-
-      <div class="modal sign-in hidden">
-        <form action="#" class="form form--sign-in">
-          <input type="text" id="login" placeholder="Логин" required />
-          <input
-            type="text"
-            id="password"
-            placeholder="Пароль"
-            style="-webkit-text-security: circle"
-            required
-          />
-          <button class="btn flex btn-form" id="auth-form--submit-btn">
-            Continue
-          </button>
-        </form>
-      </div>
-      <!-------------------------------------------------------------------->
-      <!--------------------------------- STATS ---------------------------->
-      <!-------------------------------------------------------------------->
-
-      <div class="modal stats-container hidden">
-        <svg class="btn--close-modal">
-          <use href="./img/icons/icons.svg#close"></use>
-        </svg>
         <div class="grid grid--2-1 stats">
-          <!-------------------------------------------------------------------->
-          <!------------------------------ OVERVIEW ---------------------------->
-          <!-------------------------------------------------------------------->
 
           <div class="grid grid--2-cols stats-overview">
-            <!-------------------------------------------------------------------->
-            <!-------------------------------- FUNNEL ---------------------------->
-            <!-------------------------------------------------------------------->
 
             <div class="grid grid--2-1 stats-overview--funnel box-container">
               <div class="box flex header include-data">
@@ -354,14 +318,8 @@
                 </div>
               </div>
             </div>
-            <!-------------------------------------------------------------------->
-            <!----------------------- PIPE & FORECAST ---------------------------->
-            <!-------------------------------------------------------------------->
 
             <div class="stats-overview--pipe-forecast">
-              <!-------------------------------------------------------------------->
-              <!--------------------------------- 2022 ----------------------------->
-              <!-------------------------------------------------------------------->
 
               <div
                 class="grid grid--3-cols pipe-forecast--current-year box-container"
@@ -459,9 +417,6 @@
                   </div>
                 </div>
               </div>
-              <!-------------------------------------------------------------------->
-              <!--------------------------------- Q1-Q4 ---------------------------->
-              <!-------------------------------------------------------------------->
 
               <div
                 class="grid grid--3-cols pipe-forecast--current-year-quarterly box-container"
@@ -603,9 +558,6 @@
                   </div>
                 </div>
               </div>
-              <!-------------------------------------------------------------------->
-              <!--------------------------------- 2023 ----------------------------->
-              <!-------------------------------------------------------------------->
 
               <div
                 class="grid grid--3-cols pipe-forecast--next-year box-container"
@@ -705,12 +657,8 @@
               </div>
             </div>
           </div>
-          <!-------------------------------------------------------------------->
-          <!------------------------------- MONTHLY ---------------------------->
-          <!-------------------------------------------------------------------->
 
           <div class="stats-monthly">
-            <!------------------------ JAN ------------------------->
 
             <div class="grid grid--3-cols month box-container">
               <div class="box header flex">
@@ -865,7 +813,6 @@
                 </div>
               </div>
             </div>
-            <!------------------------ FEB ------------------------->
 
             <div class="grid grid--3-cols month box-container">
               <div class="box header flex">
@@ -1022,7 +969,6 @@
                 </div>
               </div>
             </div>
-            <!------------------------ MAR ------------------------->
 
             <div class="grid grid--3-cols month box-container">
               <div class="box header flex">
@@ -1177,7 +1123,6 @@
                 </div>
               </div>
             </div>
-            <!------------------------ APR ------------------------->
 
             <div class="grid grid--3-cols month box-container">
               <div class="box header flex">
@@ -1332,7 +1277,6 @@
                 </div>
               </div>
             </div>
-            <!------------------------ MAY ------------------------->
 
             <div class="grid grid--3-cols month box-container">
               <div class="box header flex">
@@ -1487,7 +1431,6 @@
                 </div>
               </div>
             </div>
-            <!------------------------ JUN ------------------------->
 
             <div class="grid grid--3-cols month box-container">
               <div class="box header flex">
@@ -1642,7 +1585,6 @@
                 </div>
               </div>
             </div>
-            <!------------------------ JUL ------------------------->
 
             <div class="grid grid--3-cols month box-container">
               <div class="box header flex">
@@ -1797,7 +1739,6 @@
                 </div>
               </div>
             </div>
-            <!------------------------ AUG ------------------------->
 
             <div class="grid grid--3-cols month box-container">
               <div class="box header flex">
@@ -1952,7 +1893,6 @@
                 </div>
               </div>
             </div>
-            <!------------------------ SEP ------------------------->
 
             <div class="grid grid--3-cols month box-container">
               <div class="box header flex">
@@ -2109,7 +2049,6 @@
                 </div>
               </div>
             </div>
-            <!------------------------ OCT ------------------------->
 
             <div class="grid grid--3-cols month box-container">
               <div class="box header flex">
@@ -2266,7 +2205,6 @@
                 </div>
               </div>
             </div>
-            <!------------------------ NOV ------------------------->
 
             <div class="grid grid--3-cols month box-container">
               <div class="box header flex">
@@ -2423,7 +2361,6 @@
                 </div>
               </div>
             </div>
-            <!------------------------ DEC ------------------------->
 
             <div class="grid grid--3-cols month box-container">
               <div class="box header flex">
@@ -2582,24 +2519,22 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <!-------------------------------------------------------------------->
-    <!------------------------------ OVERLAY ----------------------------->
-    <!-------------------------------------------------------------------->
+      </div>  -->
 
-    <div class="overlay hidden"></div>
 
-    <div class="main-screen container">
-      <div class="grid grid--1-2">
-        <!-------------------------------------------------------------------->
-        <!--------------------------- FILTER-SECTION ------------------------->
-        <!-------------------------------------------------------------------->
 
-        <div class="filters-section">
-          <!-------------------------------------------------------------------->
-          <!--------------------------------- USER ----------------------------->
-          <!-------------------------------------------------------------------->
+    <div class="container">
+      <header class="flex">
+          <img
+            src="./img/icons/Lad_logo.svg"
+            class="header-logo"
+            alt="IT company Lad logo"
+          />
+        <div class="header-heading flex">
+        </div>
+      </header>
+      <div class="container--main-view">
+        <!-- <div class="filters-section">
 
           <div class="user-container box-container grid grid--2-1">
             <a href="#" class="btn flex btn--full" id="user-menu--stats">
@@ -2613,117 +2548,81 @@
                 <use href="./img/icons/icons.svg#stats"></use>
               </svg>
             </a>
-            <a href="#" class="btn flex btn--full" id="user-menu--refresh">
+            <a href="#" class="btn flex btn--full" id="user-menu--reload">
               <svg class="icon">
                 <use href="./img/icons/icons.svg#refresh"></use>
               </svg>
             </a>
           </div>
-          <!-------------------------------------------------------------------->
-          <!------------------------------ FILTERS ----------------------------->
-          <!-------------------------------------------------------------------->
 
           <div class="filters-container box-container grid grid--3-cols">
-            <a href="#" class="btn flex btn--full" id="btn--filter-manager">
+            <div class="filter-label flex">
               <div class="flex">
                 <svg class="icon">
                   <use href="./img/icons/icons.svg#user"></use>
                 </svg>
                 <p class="text-content">Менеджер</p>
               </div>
-              <svg class="icon">
-                <use href="./img/icons/icons.svg#search"></use>
-              </svg>
-            </a>
-            <div class="box filter search-container">
-              <select
-                class="filter-field"
-                id="filter--responsible-responsibleName"
-              >
-                <!-- <option value="Инишева Анна">Инишева Анна</option>
-                <option value="Курылев Владимир">Курылев Владимир</option>
-                <option value="Федяков Сергей">Федяков Сергей</option> -->
-              </select>
             </div>
-            <a href="#" class="btn flex btn--full" id="btn--search-company">
+            <div class="box filter search-container">
+              <select class="filter-field" id="filter--responsible"></select>
+            </div>
+            <div class="filter-label flex">
               <div class="flex">
                 <svg class="icon">
                   <use href="./img/icons/icons.svg#company"></use>
                 </svg>
                 <p class="text-content">Компания</p>
               </div>
-              <svg class="icon">
-                <use href="./img/icons/icons.svg#search"></use>
-              </svg>
-            </a>
+            </div>
             <div class="box filter search-container">
               <input
                 class="filter-field"
-                id="search--company"
+                id="filter--company"
                 type="text"
                 placeholder="Поиск"
               />
             </div>
-            <a href="#" class="btn flex btn--full" id="btn--filter-deal">
+            <div class="filter-label flex"">
               <div class="flex">
                 <svg class="icon">
                   <use href="./img/icons/icons.svg#deal"></use>
                 </svg>
                 <p class="text-content">Сделка</p>
               </div>
-              <svg class="icon">
-                <use href="./img/icons/icons.svg#search"></use>
-              </svg>
-            </a>
+            </div>
             <div class="box filter search-container">
               <input
                 class="filter-field"
-                id="search--deal-specification"
+                id="filter--deal-specification"
                 type="text"
                 placeholder="Поиск"
               />
             </div>
-            <a href="#" class="btn flex btn--full" id="btn--filter-stage">
+            <div class="filter-label flex">
               <div class="flex">
                 <svg class="icon">
                   <use href="./img/icons/icons.svg#stage"></use>
                 </svg>
                 <p class="text-content">Этап</p>
               </div>
-              <svg class="icon">
-                <use href="./img/icons/icons.svg#search"></use>
-              </svg>
-            </a>
-            <div class="box filter search-container">
-              <select class="filter-field" id="filter--stage-name">
-                <!-- <option value="Над воронкой">Над воронкой</option>
-                <option value="В воронке">В воронке</option>
-                <option value="Несколько лучших">Несколько лучших</option> -->
-              </select>
             </div>
-            <a href="#" class="btn flex btn--full" id="btn--filter-close-date">
+            <div class="box filter search-container">
+              <select class="filter-field" id="filter--stage"></select>
+            </div>
+            <div class="filter-label flex">
               <div class="flex">
                 <svg class="icon">
                   <use href="./img/icons/icons.svg#closeDate"></use>
                 </svg>
                 <p class="text-content">Закрытие</p>
               </div>
-              <svg class="icon">
-                <use href="./img/icons/icons.svg#search"></use>
-              </svg>
-            </a>
-            <div class="box filter search-container">
-              <select
-                class="filter-field"
-                id="filter--dates-closed-closedMonth"
-              >
-                <!-- <option value="Январь">Январь</option>
-                <option value="Февраль">Февраль</option>
-                <option value="Март">Март</option> -->
-              </select>
             </div>
-            <div class="grid grid--3-cols">
-              <a href="#" class="btn flex btn--full" id="btn--sort-revenue">
+            <div class="box filter search-container">
+              <select class="filter-field" id="filter--dates-closed"></select>
+            </div>
+            <div class="grid grid--3-cols sort-container">
+              <a href="#" class="btn flex btn--full btn--sort" id="sort--revenue-pipe">
                 <div class="flex">
                   <svg class="icon">
                     <use href="./img/icons/icons.svg#money"></use>
@@ -2734,7 +2633,7 @@
                   <use href="./img/icons/icons.svg#sort"></use>
                 </svg>
               </a>
-              <a href="#" class="btn flex btn--full" id="btn--sort-income">
+              <a href="#" class="btn flex btn--full btn--sort" id="sort--income-pipe">
                 <div class="flex">
                   <svg class="icon">
                     <use href="./img/icons/icons.svg#money"></use>
@@ -2767,8 +2666,8 @@
               </div>
               <a
                 href="#"
-                class="btn flex btn--full"
-                id="btn--sort-registration"
+                class="btn flex btn--full btn--sort"
+                id="sort--ticket-registration-expiresDate"
               >
                 <div class="flex">
                   <svg class="icon">
@@ -2780,7 +2679,7 @@
                   <use href="./img/icons/icons.svg#sort"></use>
                 </svg>
               </a>
-              <a href="#" class="btn flex btn--full" id="btn--sort-created">
+              <a href="#" class="btn flex btn--full btn--sort" id="sort--dates-created-createdDate">
                 <div class="flex">
                   <svg class="icon">
                     <use href="./img/icons/icons.svg#createDate"></use>
@@ -2793,17 +2692,9 @@
               </a>
             </div>
           </div>
-        </div>
-        <!-------------------------------------------------------------------->
-        <!--------------------------- DEALS-SECTION -------------------------->
-        <!-------------------------------------------------------------------->
-
-        <div class="deals-section">
-          <!-------------------------------------------------------------------->
-          <!--------------------------------- DEAL ----------------------------->
-          <!-------------------------------------------------------------------->
-
-          <!-- <div class="deal-container box-container grid grid--2-cols">
+        </div> -->
+        <!-- <div class="deals-section">
+          <div class="deal-container box-container grid grid--2-cols">
             <div class="grid grid--1-2">
               <a href="#" class="btn flex btn--full" id="user-deal--stats">
                 <div class="flex">
@@ -2882,9 +2773,8 @@
                 </a>
               </div>
             </div>
-          </div> -->
-        </div>
+          </div>
+        </div> -->
       </div>
-    </div>
   </body>
 </html>

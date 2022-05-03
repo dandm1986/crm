@@ -5,40 +5,84 @@ import 'regenerator-runtime/runtime';
 import * as MODEL from './model.js';
 
 import dealsView from './views/dealsView.js';
-import filterManagersView from './views/filterManagersView.js';
-import filterStagesView from './views/filterStagesView.js';
-import filterMonthsView from './views/filterMonthsView.js';
-import summaryView from './views/summaryView.js';
+import loginView from './views/loginView.js';
+import headerView from './views/headerView.js';
+import statsView from './views/statsView.js';
 
-const renderViews = function (data) {
-  dealsView.render(data);
-  summaryView.render(data);
-  filterManagersView.render(data);
-  filterStagesView.render(data);
-  filterMonthsView.render(data);
+const addHandlersDeals = function () {
+  dealsView.addHandlerUpdate(filterDeals);
+  dealsView.addHandlerSort(sortDeals);
+  dealsView.addHandlerReset(resetDeals);
+  headerView.addHandlerLogout(logout);
+};
+const addHandlersHeader = function () {
+  headerView.addHandlerLogout(logout);
+  headerView.addHandlerHome(resetDeals);
+  headerView.addHandlerDownload(loadDeals);
+  headerView.addHandlerStats(loadStats);
 };
 
-const filterDeals = function (id, value) {
-  [method, propertyRoute] = id.split(`--`);
-  const property = propertyRoute.replaceAll(`-`, `.`);
-  MODEL.updateState(method, property, value);
-  renderViews(MODEL.state);
+const login = async function (loginData) {
+  try {
+    await MODEL.getToken(loginData);
+    await loadDeals();
+  } catch (error) {
+    throw error;
+  }
 };
 
-const login = async function () {
+const logout = function () {
+  MODEL.deleteToken();
+  init();
+};
+
+const loadDeals = async function () {
   try {
     dealsView.renderSpinner();
-    await MODEL.getToken();
+    await MODEL.getUserData();
     await MODEL.createState();
-    renderViews(MODEL.state);
+    headerView.render(MODEL.state);
+    dealsView.render(MODEL.state);
+    addHandlersHeader();
+    addHandlersDeals();
+  } catch (error) {
+    throw error;
+  }
+};
+
+const loadStats = function () {
+  statsView.render(MODEL.state);
+};
+
+const filterDeals = function (propertyArr, value) {
+  MODEL.updateState(propertyArr, value);
+  dealsView.render(MODEL.state);
+  addHandlersDeals();
+};
+
+const sortDeals = function (propertyArr) {
+  MODEL.sortState(propertyArr);
+  dealsView.render(MODEL.state);
+  addHandlersDeals();
+};
+
+const resetDeals = function () {
+  MODEL.resetState();
+  dealsView.render(MODEL.state);
+  addHandlersDeals();
+};
+
+const init = async function () {
+  try {
+    if (MODEL.checkLoggedIn()) {
+      await loadDeals();
+    } else {
+      loginView.render(MODEL.state);
+      loginView.addHandlerLogin(login);
+    }
   } catch (error) {
     console.log(error);
   }
 };
 
-login();
-
-const init = function () {
-  dealsView.addHandlerUpdate(filterDeals);
-};
 init();

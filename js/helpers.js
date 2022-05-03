@@ -46,9 +46,11 @@ export const checkCustomFields = function (data, fieldLabel) {
 export const getMonthfromDate = function (timestamp) {
   return new Intl.DateTimeFormat(navigator.language, {
     month: `long`,
+    year: `numeric`,
   })
     .format(timestamp)
-    .toLowerCase();
+    .toLowerCase()
+    .replace(` г.`, ``);
 };
 
 export const getYearfromDate = function (timestamp) {
@@ -70,6 +72,10 @@ export const getDateFromString = function (data, fieldLabel) {
     .split(`.`)
     .map(el => +el);
   return new Date(arrNum[2], arrNum[1] - 1, arrNum[0]).getTime();
+};
+
+export const objDeepCopy = function (objOrigin) {
+  return JSON.parse(JSON.stringify(objOrigin));
 };
 
 //////////////// FORMAT VIEW //////////////////
@@ -102,19 +108,19 @@ export const capitalizeFirstLetter = function (string) {
 //////////////// CALCULATE & FILTER //////////////////
 
 export const getSum = function (arr, property) {
-  return arr.reduce((acc, el) => acc + +eval(property), 0);
+  return arr.reduce((acc, el) => acc + +getDescendantProperty(el, property), 0);
 };
 
 export const getUnique = function (arr, property) {
-  const newArr = arr.map(el => eval(property));
+  const newArr = arr.map(el => getDescendantProperty(el, property));
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
   return newArr.filter(onlyUnique);
 };
 
-export const getDescendantProperty = function (obj, desc) {
-  const arr = desc.split('.');
+export const getDescendantProperty = function (obj, propertyArr) {
+  const arr = propertyArr.slice();
   while (arr.length) {
     obj = obj[arr.shift()];
   }

@@ -18,11 +18,12 @@ export default class View {
 
   _clear() {
     this._parentElement.innerHTML = ``;
+    this._parentElement.value = ``;
   }
 
   renderSpinner() {
     const markup = `
-        <div class="spinner">
+        <div class="spinner flex">
             <svg>
                 <use href="${icons}#icon-loader"></use>
             </svg>

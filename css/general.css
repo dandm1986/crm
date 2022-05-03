@@ -16,6 +16,11 @@ body {
   line-height: 1;
   font-weight: 400;
   color: var(--color-gray);
+  background-image: linear-gradient(
+    90deg,
+    var(--color-primary-tint-4),
+    var(--color-primary-tint-5)
+  );
 }
 
 *:focus {
@@ -32,9 +37,18 @@ body {
 }
 
 .container {
-  max-width: 90vw;
-  max-height: 90vh;
-  margin: var(--spacing-96) auto;
+  width: 90vw;
+  height: 90vh;
+  margin: var(--spacing-32) auto;
+  padding: var(--spacing-24) var(--spacing-48);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--shadow-heavy);
+}
+
+.container--main-view {
+  height: 100%;
+  width: 100%;
 }
 
 .flex {
@@ -98,6 +112,13 @@ body {
 .search-container {
   display: flex;
   justify-content: center;
+}
+
+.filter-label {
+  color: var(--color-primary-tint-5);
+  background-color: var(--color-primary);
+  padding: var(--spacing-12);
+  border-radius: var(--border-radius-default);
 }
 
 .filter-field {
@@ -174,8 +195,9 @@ body {
 /* SPINNER */
 
 .spinner {
-  margin: 5rem auto;
-  text-align: center;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
 }
 
 .spinner svg {
@@ -214,5 +236,5 @@ body {
   margin-left: var(--spacing-16);
   font-size: var(--font-size-18);
   line-height: var(--line-height-medium);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-medium);
 }

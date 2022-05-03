@@ -1,7 +1,21 @@
-import { async } from 'regenerator-runtime';
-
 import * as CONFIG from './config.js';
 import * as HELPERS from './helpers.js';
+
+let toggle = 1;
+
+export let state = {
+  deals: [],
+  summary: {
+    dealsTotal: ``,
+    revenueTotal: ``,
+    incomeTotal: ``,
+  },
+  managers: [],
+  stages: [],
+  closedPeriod: [],
+};
+
+export let initialState = {};
 
 class Deal {
   constructor(data) {
@@ -94,18 +108,6 @@ class Deal {
   }
 }
 
-export const state = {
-  deals: [],
-  summary: {
-    dealsTotal: ``,
-    revenueTotal: ``,
-    incomeTotal: ``,
-  },
-  managers: [],
-  stages: [],
-  closeMonth: [],
-};
-
 const getDealsData = async function () {
   try {
     const data = await HELPERS.getJSON(
@@ -123,8 +125,14 @@ const getDealsData = async function () {
 
 const createSummary = function () {
   state.summary.dealsTotal = state.deals.length;
-  state.summary.revenueTotal = HELPERS.getSum(state.deals, `el.revenue.pipe`);
-  state.summary.incomeTotal = HELPERS.getSum(state.deals, `el.income.pipe`);
+  state.summary.revenueTotal = HELPERS.getSum(state.deals, [`revenue`, `pipe`]);
+  state.summary.incomeTotal = HELPERS.getSum(state.deals, [`income`, `pipe`]);
+};
+
+const filterOutClosedDeals = function (arr) {
+  return arr
+    .filter(el => el.stage.name !== `закрыта неудачно`)
+    .filter(el => el.stage.name !== `закрытие/заключение сделки`);
 };
 
 const prepareFilterData = function () {
@@ -135,33 +143,35 @@ const prepareFilterData = function () {
 };
 
 const clearOutFilterData = function () {
-  state.managers.length = state.stages.length = state.closeMonth.length = 0;
+  state.managers.length = state.stages.length = state.closedPeriod.length = 0;
 };
-
 const prepareManagers = function () {
-  HELPERS.getUnique(state.deals, `el.responsible.responsibleName`).forEach(
+  HELPERS.getUnique(state.deals, [`responsible`, `responsibleName`]).forEach(
     el => {
       state.managers.push(el);
     }
   );
 };
-
 const prepareStages = function () {
-  HELPERS.getUnique(state.deals, `el.stage.name`).forEach(el => {
+  HELPERS.getUnique(state.deals, [`stage`, `name`]).forEach(el => {
     state.stages.push(el);
   });
 };
-
-// TODO: Refactor to match current and next year
 const prepareCloseDates = function () {
-  const arr2022 = filterOutClosedDeals(
-    state.deals.filter(el => el.dates.closed.closedYear === 2022)
+  const thisMonth = new Date().getMonth();
+  const thisYear = new Date().getFullYear();
+  const dealsThisYear = filterOutClosedDeals(
+    state.deals.filter(el => el.dates.closed.closedYear === thisYear)
   );
-  const arr2023 = filterOutClosedDeals(
-    state.deals.filter(el => el.dates.closed.closedYear === 2023)
+  const dealsNextYear = filterOutClosedDeals(
+    state.deals.filter(el => el.dates.closed.closedYear === thisYear + 1)
   );
-  const closeMonths = [];
-  const months2022 = HELPERS.getUnique(arr2022, `el.dates.closed.closedMonth`);
+  const closedPeriod = [];
+  const monthsThisYear = HELPERS.getUnique(dealsThisYear, [
+    `dates`,
+    `closed`,
+    `closedMonth`,
+  ]).map(el => HELPERS.getFirstWord(el));
   const months = {
     январь: 0,
     февраль: 1,
@@ -176,44 +186,48 @@ const prepareCloseDates = function () {
     ноябрь: 10,
     декабрь: 11,
   };
-  const currentMonth = new Date().getMonth();
-  months2022.sort(function (m1, m2) {
+  monthsThisYear.sort((m1, m2) => {
     let n1 = months[m1],
       n2 = months[m2];
-    if (n1 < currentMonth) {
+    if (n1 < thisMonth) {
       n1 = n1 + 12;
     }
-    if (n2 < currentMonth) {
+    if (n2 < thisMonth) {
       n2 = n2 + 12;
     }
     return n1 - n2;
   });
-  months2022.forEach(el => closeMonths.push(el));
-  arr2023.length > 0 && closeMonths.push(`2023`);
-  closeMonths.forEach(el => state.closeMonth.push(el));
+  monthsThisYear.forEach(el => closedPeriod.push(el + ` ${thisYear}`));
+  dealsNextYear.length > 0 && closedPeriod.push(`${thisYear + 1}`);
+  closedPeriod.forEach(el => state.closedPeriod.push(el));
 };
 
-const filterOutClosedDeals = function (arr) {
-  return arr
-    .filter(el => el.stage.name !== `закрыта неудачно`)
-    .filter(el => el.stage.name !== `закрытие/заключение сделки`);
-};
-
-export const getToken = async function (userData) {
+export const getToken = async function (loginData) {
   try {
-    // TODO: save token locally and send request for token only if the date expired
     const data = await HELPERS.sendJSON(
       `api/2.0/authentication`,
       `POST`,
       {
         'Content-Type': 'application/json',
       },
-      CONFIG.USER_DATA.userData
+      loginData
     );
-    CONFIG.USER_DATA.token = data.response?.token || ``;
+    const token = data.response?.token || ``;
+    localStorage.setItem(`R7 API token`, token);
+    CONFIG.USER_DATA.token = localStorage.getItem(`R7 API token`);
+    console.log(CONFIG.USER_DATA.token);
   } catch (error) {
     throw error;
   }
+};
+
+export const checkLoggedIn = function () {
+  CONFIG.USER_DATA.token = localStorage.getItem(`R7 API token`);
+  return CONFIG.USER_DATA.token ? true : false;
+};
+
+export const deleteToken = function () {
+  localStorage.removeItem(`R7 API token`);
 };
 
 export const getUserData = async function () {
@@ -221,7 +235,10 @@ export const getUserData = async function () {
     const data = await HELPERS.getJSON(`api/2.0/people/@self`, `GET`, {
       Authorization: `Bearer ${CONFIG.USER_DATA.token}`,
     });
-    return data.response;
+    CONFIG.USER_DATA.userID = data.response.id;
+    CONFIG.USER_DATA.isAdmin = data.response.isAdmin;
+    CONFIG.USER_DATA.firstName = data.response.firstName;
+    CONFIG.USER_DATA.lastName = data.response.lastName;
   } catch (error) {
     throw error;
   }
@@ -229,28 +246,43 @@ export const getUserData = async function () {
 
 export const createState = async function () {
   try {
+    state.deals.length = 0;
     const dealsData = await getDealsData();
-    dealsData.forEach(el => state.deals.push(new Deal(el)));
+    CONFIG.USER_DATA.isAdmin
+      ? dealsData.forEach(el => state.deals.push(new Deal(el)))
+      : dealsData
+          .filter(el => el.responsible.id === CONFIG.USER_DATA.userID)
+          .forEach(el => state.deals.push(new Deal(el)));
     createSummary();
     prepareFilterData();
+    initialState = HELPERS.objDeepCopy(state);
   } catch (error) {
     throw error;
   }
 };
 
-export const updateState = function (method, prop, value) {
-  if (method === `filter`) {
-    state.deals = state.deals.filter(
-      deal => HELPERS.getDescendantProperty(deal, prop) === value.toLowerCase()
-    );
-  } else if (method === `search`) {
-    state.deals = state.deals.filter(deal =>
-      Object.entries(HELPERS.getDescendantProperty(deal, prop))
-        .flat() //TODO: find a universal way for any number of nested arrays
-        .map(el => el + ``)
-        .some(el => el.includes(value))
-    );
-  }
+export const updateState = function (propertyArr, value) {
+  const arrFlatDepth = propertyArr.length > 1 ? propertyArr - 1 : 1;
+  state.deals = state.deals.filter(deal =>
+    Object.entries(HELPERS.getDescendantProperty(deal, propertyArr))
+      .flat(arrFlatDepth)
+      .map(el => el + ``)
+      .some(el => el.includes(value.toLowerCase()))
+  );
   createSummary();
   prepareFilterData();
+};
+
+export const sortState = function (arr) {
+  state.deals.sort(
+    (a, b) =>
+      -(HELPERS.getDescendantProperty(a, arr) * toggle) +
+      HELPERS.getDescendantProperty(b, arr) * toggle
+  );
+  toggle = toggle * -1;
+};
+
+export const resetState = function () {
+  state = HELPERS.objDeepCopy(initialState);
+  toggle = 1;
 };
