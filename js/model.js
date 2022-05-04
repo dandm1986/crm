@@ -13,6 +13,7 @@ export let state = {
   managers: [],
   stages: [],
   closedPeriod: [],
+  stats: ``,
 };
 
 export let initialState = {};
@@ -35,6 +36,7 @@ class Deal {
     this.deal = {
       dealID: data.id,
       title: HELPERS.checkContent(data.title).toLowerCase(),
+      // TODO: Refactor to universal methods to create properties
       specification: {
         vendor: HELPERS.checkCustomFields(data, `Вендор`).toLowerCase(),
         product: HELPERS.checkCustomFields(data, `Продукт`).toLowerCase(),
@@ -105,6 +107,241 @@ class Deal {
       (this.ticket.registration.expiresYear = HELPERS.getYearfromDate(
         this.ticket.registration.expiresDate
       )));
+  }
+}
+
+class Stats {
+  stagesObj = {
+    firstContact: `первичный контакт`,
+    above: `над воронкой`,
+    in: `в воронке`,
+    bestNoDate: `лучшие без срока`,
+    bestSeveral: `несколько лучших`,
+    success: `закрытие/заключение сделки`,
+    failure: `закрыта неудачно`,
+  };
+  yearsObj = {
+    thisYear: new Date().getFullYear(),
+    nextYear: new Date().getFullYear() + 1,
+  };
+  monthsObj = {
+    month1: `январь`,
+    month2: `февраль`,
+    month3: `март`,
+    month4: `апрель`,
+    month5: `май`,
+    month6: `июнь`,
+    month7: `июль`,
+    month8: `август`,
+    month9: `сентябрь`,
+    month10: `октябрь`,
+    month11: `ноябрь`,
+    month12: `декабрь`,
+  };
+
+  constructor(deals, managerName) {
+    this.responsible = managerName ? managerName : CONFIG.USER_DATA.lastName;
+    this.pipe = {
+      total: {
+        dealsArr: filterOutClosedDeals(deals),
+        dealsArr_revenue_pipe: HELPERS.getSum(filterOutClosedDeals(deals), [
+          `revenue`,
+          `pipe`,
+        ]),
+        dealsArr_income_pipe: HELPERS.getSum(filterOutClosedDeals(deals), [
+          `income`,
+          `pipe`,
+        ]),
+      },
+    };
+    this.years = {};
+    this.months = {};
+    this.calculateProperties(deals);
+  }
+
+  calculateProperties(dealsArr) {
+    this.calculateStages(`pipe`, dealsArr);
+    this.calculateYears(`years`, dealsArr);
+    this.calculateMonths(`months`, dealsArr);
+    this.calculateQuarters();
+  }
+
+  calculateStages(parent, dealsArr) {
+    const entries = Object.entries(this.stagesObj);
+    for (const [stage, stageName] of entries) {
+      this.createChildProp(parent, stage);
+      this.filterByChildProps(
+        parent,
+        stage,
+        `dealsArr`,
+        dealsArr,
+        [`stage`, `name`],
+        stageName
+      );
+      this.sumPropValues(parent, stage, `dealsArr`, [
+        `revenue_pipe`,
+        `income_pipe`,
+      ]);
+    }
+  }
+
+  calculateYears(parent, dealsArr) {
+    const entries = Object.entries(this.yearsObj);
+    for (const [year, value] of entries) {
+      this.createChildProp(parent, year);
+      this.filterByChildProps(
+        parent,
+        year,
+        `dealsArr`,
+        dealsArr,
+        [`dates`, `closed`, `closedYear`],
+        value,
+        true
+      );
+      this.sumPropValues(parent, year, `dealsArr`, [
+        `revenue_pipe`,
+        `income_pipe`,
+        `revenue_forecast`,
+        `income_forecast`,
+      ]);
+    }
+  }
+
+  calculateMonths(parent, dealsArr) {
+    const entries = Object.entries(this.monthsObj);
+    for (const [key, value] of entries) {
+      this.createChildProp(parent, key);
+      this[parent][key][`name`] = value;
+      this.filterByChildProps(
+        parent,
+        key,
+        `dealsTotal`,
+        dealsArr,
+        [`dates`, `closed`, `closedMonth`],
+        `${value} ${this.yearsObj.thisYear}`
+      );
+      this.filterByChildProps(
+        parent,
+        key,
+        `dealsNew`,
+        dealsArr,
+        [`dates`, `created`, `createdMonth`],
+        `${value} ${this.yearsObj.thisYear}`
+      );
+      this.filterByChildProps(
+        parent,
+        key,
+        `dealsActive`,
+        dealsArr,
+        [`dates`, `closed`, `closedMonth`],
+        `${value} ${this.yearsObj.thisYear}`,
+        true
+      );
+      this.filterByChildProps(
+        parent,
+        key,
+        `dealsSuccess`,
+        this[parent][key][`dealsTotal`],
+        [`stage`, `name`],
+        this.stagesObj.success
+      );
+      this.filterByChildProps(
+        parent,
+        key,
+        `dealsFailure`,
+        this[parent][key][`dealsTotal`],
+        [`stage`, `name`],
+        this.stagesObj.failure
+      );
+      this.sumPropValues(parent, key, `dealsActive`, [
+        `revenue_pipe`,
+        `income_pipe`,
+        `revenue_forecast`,
+        `income_forecast`,
+      ]);
+      this.sumPropValues(parent, key, `dealsNew`, [
+        `revenue_pipe`,
+        `income_pipe`,
+      ]);
+      this.sumPropValues(parent, key, `dealsSuccess`, [
+        `revenue_pipe`,
+        `income_pipe`,
+      ]);
+      this.sumPropValues(parent, key, `dealsFailure`, [
+        `revenue_pipe`,
+        `income_pipe`,
+      ]);
+    }
+  }
+
+  // TODO: refactor!!!
+  calculateQuarters() {
+    this.years.thisYear.Q1_revenue_forecast =
+      this.months.month1.dealsActive_revenue_forecast +
+      this.months.month2.dealsActive_revenue_forecast +
+      this.months.month3.dealsActive_revenue_forecast;
+    this.years.thisYear.Q1_income_forecast =
+      this.months.month1.dealsActive_income_forecast +
+      this.months.month2.dealsActive_income_forecast +
+      this.months.month3.dealsActive_income_forecast;
+    this.years.thisYear.Q2_revenue_forecast =
+      this.months.month4.dealsActive_revenue_forecast +
+      this.months.month5.dealsActive_revenue_forecast +
+      this.months.month6.dealsActive_revenue_forecast;
+    this.years.thisYear.Q2_income_forecast =
+      this.months.month4.dealsActive_income_forecast +
+      this.months.month5.dealsActive_income_forecast +
+      this.months.month6.dealsActive_income_forecast;
+    this.years.thisYear.Q3_revenue_forecast =
+      this.months.month7.dealsActive_revenue_forecast +
+      this.months.month8.dealsActive_revenue_forecast +
+      this.months.month9.dealsActive_revenue_forecast;
+    this.years.thisYear.Q3_income_forecast =
+      this.months.month7.dealsActive_income_forecast +
+      this.months.month8.dealsActive_income_forecast +
+      this.months.month9.dealsActive_income_forecast;
+    this.years.thisYear.Q4_revenue_forecast =
+      this.months.month10.dealsActive_revenue_forecast +
+      this.months.month11.dealsActive_revenue_forecast +
+      this.months.month12.dealsActive_revenue_forecast;
+    this.years.thisYear.Q4_income_forecast =
+      this.months.month10.dealsActive_income_forecast +
+      this.months.month11.dealsActive_income_forecast +
+      this.months.month12.dealsActive_income_forecast;
+  }
+
+  // TODO: refactor to create any number of descendant properties
+  createChildProp(parent, child) {
+    this[parent][child] = {};
+  }
+  // TODO: try using this[getDescendantProperties]
+  filterByChildProps(
+    parent,
+    child,
+    prop,
+    dealsArr,
+    propArr,
+    value,
+    filterClosed = false
+  ) {
+    !filterClosed
+      ? (this[parent][child][prop] = dealsArr.filter(
+          deal => HELPERS.getDescendantProperty(deal, propArr) === value
+        ))
+      : (this[parent][child][prop] = filterOutClosedDeals(
+          dealsArr.filter(
+            deal => HELPERS.getDescendantProperty(deal, propArr) === value
+          )
+        ));
+  }
+  sumPropValues(parent, child, propName, propArr) {
+    propArr.forEach(prop => {
+      const propValue = HELPERS.getSum(
+        HELPERS.getDescendantProperty(this, [parent, child, propName]),
+        prop.split(`_`)
+      );
+      this[parent][child][`${propName}_${prop}`] = propValue;
+    });
   }
 }
 
@@ -215,7 +452,6 @@ export const getToken = async function (loginData) {
     const token = data.response?.token || ``;
     localStorage.setItem(`R7 API token`, token);
     CONFIG.USER_DATA.token = localStorage.getItem(`R7 API token`);
-    console.log(CONFIG.USER_DATA.token);
   } catch (error) {
     throw error;
   }
@@ -262,10 +498,9 @@ export const createState = async function () {
 };
 
 export const updateState = function (propertyArr, value) {
-  const arrFlatDepth = propertyArr.length > 1 ? propertyArr - 1 : 1;
   state.deals = state.deals.filter(deal =>
     Object.entries(HELPERS.getDescendantProperty(deal, propertyArr))
-      .flat(arrFlatDepth)
+      .flat(propertyArr.length)
       .map(el => el + ``)
       .some(el => el.includes(value.toLowerCase()))
   );
@@ -285,4 +520,13 @@ export const sortState = function (arr) {
 export const resetState = function () {
   state = HELPERS.objDeepCopy(initialState);
   toggle = 1;
+};
+
+export const getStats = function (managerName) {
+  const deals = managerName
+    ? initialState.deals.filter(
+        deal => deal.responsible.responsibleName === managerName.toLowerCase()
+      )
+    : initialState.deals.slice();
+  state.stats = new Stats(deals, managerName);
 };

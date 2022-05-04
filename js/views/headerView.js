@@ -12,7 +12,9 @@ class HeaderView extends View {
   }
   addHandlerStats(handler) {
     const statsBtn = document.querySelector(`#menu--stats`);
-    statsBtn.addEventListener(`click`, handler);
+    statsBtn.addEventListener(`click`, function (e) {
+      handler();
+    });
   }
   addHandlerHome(handler) {
     const homeBtn = document.querySelector(`#menu--home`);

@@ -13,6 +13,7 @@ const addHandlersDeals = function () {
   dealsView.addHandlerUpdate(filterDeals);
   dealsView.addHandlerSort(sortDeals);
   dealsView.addHandlerReset(resetDeals);
+  dealsView.addHandlerStats(loadStats);
   headerView.addHandlerLogout(logout);
 };
 const addHandlersHeader = function () {
@@ -50,8 +51,10 @@ const loadDeals = async function () {
   }
 };
 
-const loadStats = function () {
-  statsView.render(MODEL.state);
+const loadStats = function (manager) {
+  MODEL.getStats(manager);
+  statsView.render(MODEL.state.stats);
+  console.log(MODEL.state.stats);
 };
 
 const filterDeals = function (propertyArr, value) {

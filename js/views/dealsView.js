@@ -33,6 +33,14 @@ class DealsView extends View {
     });
   }
 
+  addHandlerStats(handler) {
+    const dealsSection = document.querySelector(`.deals-section`);
+    dealsSection.addEventListener(`click`, function (e) {
+      const statsBtn = e.target.closest(`.user-deal--stats`);
+      statsBtn && handler(statsBtn.querySelector(`.manager-name`).textContent);
+    });
+  }
+
   _generateMarkup() {
     return `
     <div class="grid grid--1-2 container--deals-view">
@@ -226,12 +234,12 @@ class DealsView extends View {
     return `
     <div class="deal-container box-container grid grid--2-cols">
       <div class="grid grid--1-2">
-        <a href="#" class="btn flex btn--full" id="user-deal--stats">
+        <a href="#" class="btn flex btn--full user-deal--stats">
           <div class="flex">
             <svg class="icon">
               <use href="${icons}#user"></use>
             </svg>
-            <p class="text-content" id="manager-name">${HELPERS.capitalizeFirstLetter(
+            <p class="text-content manager-name">${HELPERS.capitalizeFirstLetter(
               deal.responsible.responsibleName
             )}</p>
           </div>
