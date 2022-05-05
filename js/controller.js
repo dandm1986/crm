@@ -46,6 +46,7 @@ const loadDeals = async function () {
     dealsView.render(MODEL.state);
     addHandlersHeader();
     addHandlersDeals();
+    console.log(MODEL.state);
   } catch (error) {
     throw error;
   }

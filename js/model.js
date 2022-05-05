@@ -71,6 +71,9 @@ class Deal {
         closedDate:
           HELPERS.checkContent(data.expectedCloseDate) &&
           new Date(data.expectedCloseDate).getTime(),
+        actualClosedDate:
+          HELPERS.checkContent(data.actualCloseDate) &&
+          new Date(data.actualCloseDate).getTime(),
       },
     };
     this.ticket = {
@@ -99,6 +102,13 @@ class Deal {
       )),
       (this.dates.closed.closedYear = HELPERS.getYearfromDate(
         this.dates.closed.closedDate
+      )));
+    this.dates.closed.actualClosedDate &&
+      ((this.dates.closed.actualClosedMonth = HELPERS.getMonthfromDate(
+        this.dates.closed.actualClosedDate
+      )),
+      (this.dates.closed.actualClosedYear = HELPERS.getYearfromDate(
+        this.dates.closed.actualClosedDate
       )));
     this.ticket.registration.expiresDate &&
       ((this.ticket.registration.expiresMonth = HELPERS.getMonthfromDate(
@@ -215,9 +225,9 @@ class Stats {
       this.filterByChildProps(
         parent,
         key,
-        `dealsTotal`,
+        `dealsClosed`,
         dealsArr,
-        [`dates`, `closed`, `closedMonth`],
+        [`dates`, `closed`, `actualClosedMonth`],
         `${value} ${this.yearsObj.thisYear}`
       );
       this.filterByChildProps(
@@ -241,7 +251,7 @@ class Stats {
         parent,
         key,
         `dealsSuccess`,
-        this[parent][key][`dealsTotal`],
+        this[parent][key][`dealsClosed`],
         [`stage`, `name`],
         this.stagesObj.success
       );
@@ -249,7 +259,7 @@ class Stats {
         parent,
         key,
         `dealsFailure`,
-        this[parent][key][`dealsTotal`],
+        this[parent][key][`dealsClosed`],
         [`stage`, `name`],
         this.stagesObj.failure
       );
@@ -491,6 +501,7 @@ export const createState = async function () {
           .forEach(el => state.deals.push(new Deal(el)));
     createSummary();
     prepareFilterData();
+    console.log(dealsData);
     initialState = HELPERS.objDeepCopy(state);
   } catch (error) {
     throw error;
