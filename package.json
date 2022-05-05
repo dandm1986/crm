@@ -4,7 +4,7 @@
   "description": "A small CRM app that uses R7 database via API to collect data.",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --dist-dir ./dist"
   },
   "author": "Daniil Dmitrenko",
   "license": "ISC",
