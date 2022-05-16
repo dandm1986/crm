@@ -46,7 +46,6 @@ const loadDeals = async function () {
     dealsView.render(MODEL.state);
     addHandlersHeader();
     addHandlersDeals();
-    console.log(MODEL.state);
   } catch (error) {
     throw error;
   }
@@ -55,7 +54,6 @@ const loadDeals = async function () {
 const loadStats = function (manager) {
   MODEL.getStats(manager);
   statsView.render(MODEL.state.stats);
-  console.log(MODEL.state.stats);
 };
 
 const filterDeals = function (propertyArr, value) {

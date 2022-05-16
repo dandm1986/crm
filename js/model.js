@@ -501,7 +501,6 @@ export const createState = async function () {
           .forEach(el => state.deals.push(new Deal(el)));
     createSummary();
     prepareFilterData();
-    console.log(dealsData);
     initialState = HELPERS.objDeepCopy(state);
   } catch (error) {
     throw error;
