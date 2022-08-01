@@ -188,6 +188,7 @@ class Stats {
         [`stage`, `name`],
         stageName
       );
+      // TODO: Fix naming convention!!!
       this.sumPropValues(parent, stage, `dealsArr`, [
         `revenue_pipe`,
         `income_pipe`,
